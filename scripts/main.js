@@ -1,6 +1,6 @@
 
 Hooks.on("updateCombat", function(combat) {
-  if (!isActiveGM())
+  if (!isResponsibleGM())
     return;
   if (combat == undefined)
     return;
@@ -18,6 +18,13 @@ Hooks.on("deleteCombat", function(params) {
   //console.log("magroader combat ended");
   post("endCombat", {});
 });
+
+function isResponsibleGM() {
+	if (!game.user.isGM)
+		return false;
+	const connectedGMs = game.users.filter(isActiveGM);
+	return !connectedGMs.some(other => other.id < game.user.id);
+}
 
 function isActiveGM(user) {
 	return user.active && user.isGM;
