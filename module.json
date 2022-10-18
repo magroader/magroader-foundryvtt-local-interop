@@ -6,6 +6,9 @@
         { "name": "MagRoader" }
     ],
     "version": "1.0.0",
+    "scripts": [
+      "scripts/main.js"
+    ],
     "compatibility": {
       "minimum": "10",
       "verified": "10"
