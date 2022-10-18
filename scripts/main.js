@@ -1,4 +1,7 @@
+
 Hooks.on("updateCombat", function(combat) {
+  if (!isActiveGM())
+    return;
   if (combat == undefined)
     return;
   var combatant = combat.combatant;
@@ -15,6 +18,10 @@ Hooks.on("deleteCombat", function(params) {
   //console.log("magroader combat ended");
   post("endCombat", {});
 });
+
+function isActiveGM(user) {
+	return user.active && user.isGM;
+}
 
 function post(path, data) {
   //var url = "https://14f1b025-4626-454a-921c-b04882be24b0.mock.pstmn.io/"
