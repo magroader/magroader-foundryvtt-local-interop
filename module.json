@@ -1,0 +1,13 @@
+{
+    "id": "magroader-foundryvtt-local-interop",
+    "title": "MagRoader's Local Interop",
+    "description": "Allows interoperation between Foundry and local applications.",
+    "authors": [
+        { "name": "MagRoader" }
+    ],
+    "version": "1.0.0",
+    "compatibility": {
+      "minimum": "10",
+      "verified": "10"
+    }
+}
