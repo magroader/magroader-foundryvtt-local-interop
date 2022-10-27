@@ -1,4 +1,6 @@
 let moduleName = "magroader-foundryvtt-local-interop";
+let defaultUserChoices = {};
+let unknownUserId = "unknownUser";
 
 Hooks.once('init', function() {
   console.log("CALLING REGISTER SETTINGS");
@@ -11,10 +13,28 @@ Hooks.once('init', function() {
 		default: "http://localhost:31832/",
 		type: String,
 	});
+
+	game.settings.register(moduleName, "interop-user", {
+		name: "Interop User",
+		hint: "Which user to send POST / GET requests to",
+		scope: "world",
+    config: true,
+    restricted: true,
+    choices: defaultUserChoices,
+    default: unknownUserId,
+    type: String,
+	});
+});
+
+Hooks.once('ready', function() {
+  game.users.forEach((u) => {
+    defaultUserChoices[u.id] = u.name;
+  });
+  game.settings.settings.get(moduleName + '.interop-user').choices = defaultUserChoices;
 });
 
 Hooks.on("updateCombat", function(combat) {
-  if (!isResponsibleGM())
+  if (!isInteropUser())
     return;
   if (combat == undefined)
     return;
@@ -29,18 +49,14 @@ Hooks.on("updateCombat", function(combat) {
 });
 
 Hooks.on("deleteCombat", function(params) {
+  if (!isInteropUser())
+    return;
+
   post("endCombat", {});
 });
 
-function isResponsibleGM() {
-	if (!game.user.isGM)
-		return false;
-	const connectedGMs = game.users.filter(isActiveGM);
-	return !connectedGMs.some(other => other.id < game.user.id);
-}
-
-function isActiveGM(user) {
-	return user.active && user.isGM;
+function isInteropUser() {
+  return game?.user?.id === game.settings.get(moduleName, 'interop-user');
 }
 
 function post(path, data) {

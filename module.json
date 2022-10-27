@@ -5,10 +5,10 @@
     "authors": [
         { "name": "MagRoader" }
     ],
-    "version": "0.1.0",
+    "version": "0.2.0",
     "url": "https://github.com/magroader/magroader-foundryvtt-local-interop",
     "manifest": "https://raw.githubusercontent.com/magroader/magroader-foundryvtt-local-interop/main/module.json",
-    "download": "https://github.com/magroader/magroader-foundryvtt-local-interop/archive/refs/tags/v0.1.0.zip",
+    "download": "https://github.com/magroader/magroader-foundryvtt-local-interop/archive/refs/tags/v0.2.0.zip",
     "esmodules": [
         "./scripts/main.js"
     ],
