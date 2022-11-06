@@ -1,5 +1,5 @@
 {
-    "id": "magroader-foundryvtt-local-interop",
+    "id": "magroader-local-interop",
     "title": "MagRoader's Local Interop",
     "description": "Allows interoperation between Foundry and local applications.",
     "authors": [
